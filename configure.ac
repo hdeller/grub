@@ -121,6 +121,7 @@ case "$target_cpu" in
   aarch64*)	target_cpu=arm64 ;;
   riscv32*)	target_cpu=riscv32 ;;
   riscv64*)	target_cpu=riscv64 ;;
+  hppa*)	target_cpu=hppa ;;
 esac
 
 # Specify the platform (such as firmware).
@@ -146,6 +147,7 @@ if test "x$with_platform" = x; then
     arm64-*) platform=efi ;;
     riscv32-*) platform=efi ;;
     riscv64-*) platform=efi ;;
+    hppa-*) platform=hppa ;;
     *)
       AC_MSG_WARN([unsupported CPU: "$target_cpu" - only building utilities])
       platform=none
@@ -196,6 +198,7 @@ case "$target_cpu"-"$platform" in
   arm64-efi) ;;
   riscv32-efi) ;;
   riscv64-efi) ;;
+  hppa-hppa) ;;
   *-emu) ;;
   *-none) ;;
   *) AC_MSG_ERROR([platform "$platform" is not supported for target CPU "$target_cpu"]) ;;
@@ -250,6 +253,7 @@ case "$platform" in
   loongson)	machine_CPPFLAGS="$machine_CPPFLAGS -DGRUB_MACHINE_MIPS_LOONGSON=1" ;;
   qemu_mips)	machine_CPPFLAGS="$machine_CPPFLAGS -DGRUB_MACHINE_MIPS_QEMU_MIPS=1" ;;
   arc)		machine_CPPFLAGS="$machine_CPPFLAGS -DGRUB_MACHINE_ARC=1" ;;
+  hppa)		machine_CPPFLAGS="$machine_CPPFLAGS -DGRUB_MACHINE_HPPA=1" ;;
 esac
 if test x${target_cpu} = xmipsel ; then
    machine_CPPFLAGS="$machine_CPPFLAGS -DGRUB_MACHINE=`echo mips_$platform | sed y,abcdefghijklmnopqrstuvwxyz,ABCDEFGHIJKLMNOPQRSTUVWXYZ,`"
@@ -2011,6 +2015,7 @@ AM_CONDITIONAL([COND_sparc64_ieee1275], [test x$target_cpu = xsparc64 -a x$platf
 AM_CONDITIONAL([COND_sparc64_emu], [test x$target_cpu = xsparc64 -a x$platform = xemu])
 AM_CONDITIONAL([COND_x86_64_efi], [test x$target_cpu = xx86_64 -a x$platform = xefi])
 AM_CONDITIONAL([COND_x86_64_xen], [test x$target_cpu = xx86_64 -a x$platform = xxen])
+AM_CONDITIONAL([COND_hppa_hppa], [test "(" x$target_cpu = hppa -o x$target_cpu = hppa2.0 ")"  -a x$platform = xhppa])
 
 AM_CONDITIONAL([COND_HOST_HURD], [test x$host_kernel = xhurd])
 AM_CONDITIONAL([COND_HOST_LINUX], [test x$host_kernel = xlinux])
