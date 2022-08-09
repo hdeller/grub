@@ -1,0 +1,10 @@
+./configure --build=hppa-linux --host=x86_64-redhat-linux \
+    --target=hppa-linux-gnu --with-platform=hppa \
+    BUILD_CC=gcc BUILD_PKG_CONFIG=pkg-config \
+    HOST_CC=gcc HOST_CFLAGS='-g -O2' \
+    PKG_CONFIG=pkg-config TARGET_CC=hppa-linux-gnu-gcc \
+    TARGET_CFLAGS='-Os ' TARGET_CCASFLAGS='' \
+    TARGET_OBJCOPY=hppa-linux-gnu-objcopy \
+    TARGET_STRIP=hppa-linux-gnu-strip TARGET_NM=hppa-linux-gnu-nm \
+    TARGET_RANLIB=hppa-linux-gnu-ranlib LEX=flex
+
