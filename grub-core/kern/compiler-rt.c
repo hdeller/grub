@@ -52,6 +52,7 @@ __bzero (void *s, grub_size_t n)
 
 #endif
 
+aaaa
 #if GRUB_DIVISION_IN_SOFTWARE
 
 grub_uint32_t
@@ -238,8 +239,9 @@ union component64
 };
 
 #if defined (__powerpc__) || defined (__arm__) || defined(__mips__) || \
-    (defined(__riscv) && (__riscv_xlen == 32))
+    (defined(__riscv) && (__riscv_xlen == 32) || defined(__hppa__))
 
+bbb
 /* Based on libgcc2.c from gcc suite.  */
 grub_uint64_t
 __lshrdi3 (grub_uint64_t u, int b)
@@ -420,7 +422,7 @@ __aeabi_llsl (grub_uint64_t u, int b)
 
 #endif
 
-#if defined(__mips__) || defined(__riscv) || defined(__sparc__)
+#if defined(__mips__) || defined(__riscv) || defined(__sparc__) || defined(__hppa__)
 /* Based on libgcc from gcc suite. */
 int
 __clzsi2 (grub_uint32_t val)
@@ -448,7 +450,8 @@ __clzsi2 (grub_uint32_t val)
 }
 #endif
 
-#if defined(__mips__) || defined(__riscv) || defined(__sparc__)
+#if defined(__mips__) || defined(__riscv) || defined(__sparc__) || defined(__hppa__)
+ssss;
 int
 __clzdi2 (grub_uint64_t val)
 {

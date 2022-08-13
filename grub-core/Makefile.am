@@ -204,6 +204,12 @@ KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/arc/arc.h
 KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/terminfo.h
 endif
 
+if COND_hppa_hppa
+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/extcmd.h
+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/hppa/hppa.h
+KERNEL_HEADER_FILES += $(top_srcdir)/include/grub/terminfo.h
+endif
+
 if COND_mips_qemu_mips
 KERNEL_HEADER_FILES += $(top_builddir)/include/grub/keyboard_layouts.h
 KERNEL_HEADER_FILES += $(top_builddir)/include/grub/machine/kernel.h

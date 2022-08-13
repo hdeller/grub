@@ -299,6 +299,10 @@ kernel = {
   mips_arc = term/arc/console.c;
   mips_arc = disk/arc/arcdisk.c;
 
+  hppa_hppa = kern/hppa/hppa/init.c;
+  hppa_hppa = term/hppa/console.c;
+  hppa_hppa = disk/hppa/hppadisk.c;
+
   mips_loongson = term/ns8250.c;
   mips_loongson = bus/bonito.c;
   mips_loongson = bus/cs5536.c;

@@ -81,6 +81,7 @@ enum options
     SEARCH_HINT_BAREMETAL,
     SEARCH_HINT_EFI,
     SEARCH_HINT_ARC,
+    SEARCH_HINT_HPPA,
  };
 
 static grub_err_t
@@ -121,6 +122,12 @@ grub_cmd_search (grub_extcmd_context_t ctxt, int argc, char **args)
       nhints++;
 #endif
 
+#ifdef GRUB_MACHINE_HPPA
+  if (state[SEARCH_HINT_HPPA].set)
+    for (i = 0; state[SEARCH_HINT_HPPA].args[i]; i++)
+      nhints++;
+#endif
+
   if (state[SEARCH_HINT_BAREMETAL].set)
     for (i = 0; state[SEARCH_HINT_BAREMETAL].args[i]; i++)
       nhints++;
@@ -150,6 +157,12 @@ grub_cmd_search (grub_extcmd_context_t ctxt, int argc, char **args)
   if (state[SEARCH_HINT_ARC].set)
     for (i = 0; state[SEARCH_HINT_ARC].args[i]; i++)
       hints[j++] = state[SEARCH_HINT_ARC].args[i];
+#endif
+
+#ifdef GRUB_MACHINE_HPPA
+  if (state[SEARCH_HINT_HPPA].set)
+    for (i = 0; state[SEARCH_HINT_HPPA].args[i]; i++)
+      hints[j++] = state[SEARCH_HINT_HPPA].args[i];
 #endif
 
 #ifdef GRUB_MACHINE_PCBIOS

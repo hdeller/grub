@@ -365,15 +365,16 @@ extern UDItype __udiv_qrnnd ();
 	     "rM" ((USItype)(al)),                                      \
 	     "rM" ((USItype)(bl)))
 #if defined (_PA_RISC1_1)
-#define umul_ppmm(wh, wl, u, v) \
+#define umul_ppmm_NO_NO(wh, wl, u, v) \
   do {									\
     union {UDItype __ll;						\
 	   struct {USItype __h, __l;} __i;				\
 	  } __xx;							\
-    __asm__ ("	xmpyu %1,%2,%0"                                           \
-	     : "=*f" (__xx.__ll)                                        \
-	     : "*f" ((USItype)(u)),                                     \
-	       "*f" ((USItype)(v)));                                    \
+    /* error: inconsistent operand constraints in an ‘asm’ */		\
+    __asm__ ("xmpyu %1,%2,%0"                                           \
+	     : "=x" (__xx.__ll)                                        \
+	     : "x" ((USItype)(u)),                                     \
+	       "x" ((USItype)(v)));                                    \
     (wh) = __xx.__i.__h;						\
     (wl) = __xx.__i.__l;						\
   } while (0)

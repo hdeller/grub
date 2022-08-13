@@ -16,19 +16,12 @@
  *  along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GRUB_TYPES_CPU_HEADER
-#define GRUB_TYPES_CPU_HEADER	1
+#ifndef GRUB_SETJMP_CPU_HEADER
+#define GRUB_SETJMP_CPU_HEADER	1
 
-/* The size of void *.  */
-#define GRUB_TARGET_SIZEOF_VOID_P	4
+typedef unsigned long long grub_jmp_buf[21];
 
-/* The size of long.  */
-#define GRUB_TARGET_SIZEOF_LONG		4
+int grub_setjmp (grub_jmp_buf env) RETURNS_TWICE;
+void grub_longjmp (grub_jmp_buf env, int val) __attribute__ ((noreturn));
 
-/* big-endian only.  */
-#define GRUB_TARGET_WORDS_BIGENDIAN	1
-
-/* Unaligned accesses only supported if MMU enabled */
-#undef GRUB_HAVE_UNALIGNED_ACCESS
-
-#endif /* ! GRUB_TYPES_CPU_HEADER */
+#endif /* ! GRUB_SETJMP_CPU_HEADER */

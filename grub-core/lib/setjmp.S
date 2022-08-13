@@ -21,6 +21,8 @@
 #include "./arm64/setjmp.S"
 #elif defined(__riscv)
 #include "./riscv/setjmp.S"
+#elif defined(__hppa__)
+#include "./hppa/setjmp.S"
 #else
 #error "Unknown target cpu type"
 #endif

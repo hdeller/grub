@@ -899,6 +899,17 @@ if test x"$platform" != xemu ; then
        AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])],
 		         [grub_cv_target_cc_soft_float="-m4-nofpu"], [])
     fi
+    # maybe delete the following check
+    if test "x$target_cpu" = xhppa; then
+       # on hppa we need to enable FPU for xmpyu instruction in mpi - else: invalid constraints in asm statement
+       CFLAGS="$TARGET_CFLAGS -mdisable-fpregs -Werror"   # -msoft-mult -mno-soft-float
+       AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])],
+		         [grub_cv_target_cc_soft_float="-mdisable-fpregs"], [])
+    fi
+    if test "x$target_cpu" = xhppa-no-no; then
+       LIBGCC=$($TARGET_CC -print-libgcc-file-name)
+       TARGET_LDFLAGS="$TARGET_LDFLAGS -Wl,$LIBGCC"
+    fi
     for cand in "-msoft-float -Xclang -msoft-float -Xclang -no-implicit-float" \
 		"-Xclang -msoft-float -Xclang -no-implicit-float" \
 		"-Xclang -msoft-float" "-msoft-float"; do
